@@ -1,0 +1,9 @@
+# General ignores
+target/
+*.log
+sh.exe.stackdump
+
+# IntelliJ ignores
+*.iml
+.idea
+.idea/worskspace.xml
