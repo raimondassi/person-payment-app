@@ -7,3 +7,6 @@ sh.exe.stackdump
 *.iml
 .idea
 .idea/worskspace.xml
+person-payment-modules/payment/src/main/resources/paymentsdb.db.mv.db
+person-payment-modules/person/src/main/resources/personsdb.db.mv.db
+person-payment-modules/person/src/main/resources/personsdb.db.trace.db
