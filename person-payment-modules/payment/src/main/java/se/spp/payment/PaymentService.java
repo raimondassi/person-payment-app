@@ -40,7 +40,7 @@ public class PaymentService {
                 .forEach(payments::add);
         return payments
                 .stream()
-                .filter(payment -> payment.getPersonId() == personId)
+                .filter(payment -> payment.getPersonId().equals(personId))
                 .collect(Collectors.toList());
 
     }
