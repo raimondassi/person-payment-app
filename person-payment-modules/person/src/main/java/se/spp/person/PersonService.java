@@ -8,6 +8,7 @@ import se.spp.common.Person;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -15,6 +16,7 @@ public class PersonService {
 
     @Autowired
     public PersonRepository personRepository;
+
 
     public void addPerson(Person person) {
         personRepository.save(person);
@@ -37,6 +39,15 @@ public class PersonService {
 
     public void updatePerson(Person person) {
         personRepository.save(person);
+    }
+
+    public Person findPersonIdFromOfficialId(String officialId){
+             return getAllPersons()
+                .stream()
+                .filter(person -> person.getOfficialId().equals(officialId))
+                .collect(Collectors.toList())
+                .get(0);
+
     }
 
 

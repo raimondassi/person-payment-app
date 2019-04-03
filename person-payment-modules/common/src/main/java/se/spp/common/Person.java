@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 public class Person {
@@ -47,6 +48,7 @@ public class Person {
     public void setOfficialId(String officialId) {
         this.officialId = officialId;
     }
+
 }
 
 

@@ -39,16 +39,15 @@ public class PaymentController {
         return paymentService.getAllPayments();
     }
 
-    @GetMapping("/get-payments-for-person/{personId}")
-    public List<Payment> getAllPaymentsForPerson(@PathVariable String personId) {
-        return paymentService.getPaymentsForPerson(personId);
+    @GetMapping("/get-payments-for-person/{officialId}")
+    public List<Payment> getAllPaymentsForPerson(@PathVariable String officialId) {
+        return paymentService.getPaymentsForPerson(officialId);
     }
 
     @PostMapping("/update-payment")
     public void updatePayment(@RequestBody Payment payment) {
         paymentService.updatePayment(payment);
     }
-
 }
 
 

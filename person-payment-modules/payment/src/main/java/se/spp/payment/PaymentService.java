@@ -1,7 +1,9 @@
 package se.spp.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import se.spp.common.Payment;
 import se.spp.common.Person;
 
@@ -34,14 +36,14 @@ public class PaymentService {
         return payments;
     }
 
-    public List<Payment> getPaymentsForPerson(String personId) {
+    public List<Payment> getPaymentsForPerson(String officialId) {
         List<Payment> payments = new ArrayList<>();
-        paymentRepository.findAll()
-                .forEach(payments::add);
-        return payments
-                .stream()
-                .filter(payment -> payment.getPersonId().equals(personId))
-                .collect(Collectors.toList());
+
+        RestTemplate restTemplate = new RestTemplate();
+        String personResourceUrl = "http://localhost:8081/person//find-person-from-official-id/";
+        Person personFromOfficialId = restTemplate.getForObject(personResourceUrl + officialId, Person.class);
+        Long personId = personFromOfficialId.getId();
+        return (List<Payment>) paymentRepository.findAllById(Collections.singleton(personId));
 
     }
 

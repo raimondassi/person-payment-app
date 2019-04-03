@@ -47,6 +47,11 @@ public class PersonController {
         personService.updatePerson(person);
     }
 
+    @GetMapping("/find-person-from-official-id/{officialId}")
+    public Person findPersonIdFromOfficialId(@PathVariable String officialId) {
+        return personService.findPersonIdFromOfficialId(officialId);
+    }
+
 
 }
 

@@ -11,14 +11,14 @@ import java.util.Date;
 @Entity
 public class Payment {
 
-    private String personId;
+    private int personId;
     @Id
   //@GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long paymentId;
     private double ammount;
     private LocalDateTime date;
 
-    public Payment(String personId, Long paymentId, double ammount, LocalDateTime date) {
+    public Payment(int personId, Long paymentId, double ammount, LocalDateTime date) {
         this.personId = personId;
         this.paymentId = paymentId;
         this.ammount = ammount;
@@ -54,11 +54,11 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public String getPersonId() {
+    public int getPersonId() {
         return personId;
     }
 
-    public void setPersonId(String personId) {
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
 }
