@@ -1,16 +1,11 @@
 package se.spp.common;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
 
 @Entity
 public class Person {
-
     @Id
-  //  @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String officialId;
     private String name;
@@ -23,7 +18,6 @@ public class Person {
 
     public Person() {
     }
-
 
     public Long getId() {
         return id;
@@ -48,7 +42,6 @@ public class Person {
     public void setOfficialId(String officialId) {
         this.officialId = officialId;
     }
-
 }
 
 

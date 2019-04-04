@@ -2,11 +2,11 @@
 target/
 *.log
 sh.exe.stackdump
+*.db.mv.db
+*.db.trace.db
 
 # IntelliJ ignores
 *.iml
 .idea
 .idea/worskspace.xml
-person-payment-modules/payment/src/main/resources/paymentsdb.db.mv.db
-person-payment-modules/person/src/main/resources/personsdb.db.mv.db
-person-payment-modules/person/src/main/resources/personsdb.db.trace.db
+

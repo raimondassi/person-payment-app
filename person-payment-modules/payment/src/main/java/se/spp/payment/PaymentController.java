@@ -1,7 +1,12 @@
 package se.spp.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import se.spp.common.Payment;
 
 import java.util.List;
@@ -10,7 +15,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
-
     public final PaymentService paymentService;
 
     @Autowired
@@ -21,7 +25,11 @@ public class PaymentController {
     @PostMapping("/add-payment")
     public void addPayment(@RequestBody Payment payment) {
         paymentService.addPayment(payment);
+    }
 
+    @PostMapping("/add-payments-with-person-official-id/{officialId}")
+    public void addPaymentWithPersonOfficialId(@PathVariable String officialId, @RequestBody Payment payment) {
+         paymentService.addPaymentWithPersonOfficialId(officialId, payment);
     }
 
     @PostMapping("/delete-payment/{id}")

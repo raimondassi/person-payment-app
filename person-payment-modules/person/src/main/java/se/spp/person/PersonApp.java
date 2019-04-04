@@ -9,9 +9,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @SpringBootApplication
 @EntityScan("se.spp.common")
 public class PersonApp {
-
     public static void main(String[] args) {
         SpringApplication.run(PersonApp.class, args);
     }
-
 }

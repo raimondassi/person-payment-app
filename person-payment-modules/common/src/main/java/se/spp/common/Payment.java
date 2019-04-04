@@ -1,41 +1,33 @@
 package se.spp.common;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Payment {
-
-    private int personId;
+    private Long personId;
     @Id
-  //@GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long paymentId;
-    private double ammount;
+    private double amount;
     private LocalDateTime date;
 
-    public Payment(int personId, Long paymentId, double ammount, LocalDateTime date) {
+    public Payment(Long personId, Long paymentId, double ammount, LocalDateTime date) {
         this.personId = personId;
         this.paymentId = paymentId;
-        this.ammount = ammount;
+        this.amount = ammount;
         this.date = date;
     }
 
     public Payment() {
-
     }
 
-
-    public double getAmmount() {
-        return ammount;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmmount(double ammount) {
-        this.ammount = ammount;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public LocalDateTime getDate() {
@@ -54,11 +46,11 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public int getPersonId() {
+    public Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
     }
 }
