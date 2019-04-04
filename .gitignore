@@ -2,6 +2,7 @@
 target/
 *.log
 sh.exe.stackdump
+db/
 *.db.mv.db
 *.db.trace.db
 

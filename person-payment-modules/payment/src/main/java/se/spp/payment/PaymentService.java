@@ -16,12 +16,7 @@ public class PaymentService {
     @Autowired
     public PaymentRepository paymentRepository;
     @Value("${personUrl}")
-    static String personUrl;
-
-
-    public void addPayment(Payment payment) {
-        paymentRepository.save(payment);
-    }
+    String personUrl;
 
     public void addPaymentWithPersonOfficialId(String officialId, Payment payment) {
         RestTemplate restTemplate = new RestTemplate();
@@ -30,11 +25,22 @@ public class PaymentService {
         Long personId = personFromOfficialId.getId();
         payment.setPersonId(personId);
         addPayment(payment);
+    }
 
+    public void addPayment(Payment payment) {
+        if (paymentRepository.findById(payment.getPersonId()).isPresent()) {
+            System.out.println("The payment already exist");
+            return;
+        } else
+            paymentRepository.save(payment);
     }
 
     public void deletePayment(Long id) {
-        paymentRepository.deleteById(id);
+        if (paymentRepository.findById(id).isPresent())
+            paymentRepository.deleteById(id);
+        else
+            System.out.println("The payment does not exist");
+        return;
     }
 
     public Optional<Payment> findPayment(Long id) {
@@ -46,15 +52,25 @@ public class PaymentService {
     }
 
     public List<Payment> getPaymentsForPerson(String officialId) {
-         RestTemplate restTemplate = new RestTemplate();
-         String personResourceUrl = personUrl + "find-person-from-official-id/";
-        Person personFromOfficialId = restTemplate.getForObject(personResourceUrl + officialId, Person.class);
-        Long personId = personFromOfficialId.getId();
-        return paymentRepository.findAll().stream().filter(payment -> payment.getPersonId() == personId).collect(Collectors.toList());
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            String personResourceUrl = personUrl + "find-person-from-official-id/";
+            Person personFromOfficialId = restTemplate.getForObject(personResourceUrl + officialId, Person.class);
+            Long personId = personFromOfficialId.getId();
+            return paymentRepository.findAll().stream().filter(payment -> payment.getPersonId() == personId).collect(Collectors.toList());
+        } catch (NullPointerException e) {
+            System.out.println("No person or payment");
+            return null;
+        }
     }
 
     public void updatePayment(Payment payment) {
-        paymentRepository.save(payment);
+        if (paymentRepository.findById(payment.getPaymentId()).isPresent())
+            paymentRepository.save(payment);
+        else {
+            System.out.println("The payment does not exist");
+            return;
+        }
     }
 }
 
